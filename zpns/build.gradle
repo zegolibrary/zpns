@@ -26,7 +26,7 @@ android {
     task downloadSDK(type:Exec) {
 
         workingDir './'
-        commandLine "python", "download_native_sdk.py", "--sdk_download_url", "https://artifact-master.zego.cloud/generic/zim/public/ZIM/android/ZIM-android-shared-java.zip?version=2.0.0.575", "--sdk_zip_root_folder", ""
+        commandLine "python", "download_native_sdk.py", "--sdk_download_url", "https://artifact-master.zego.cloud/generic/zim/public/ZPNs/android/ZPNs-android-shared-java.zip?version=2.1.0.593", "--sdk_zip_root_folder", ""
     }
     
     tasks.withType(JavaCompile) {
