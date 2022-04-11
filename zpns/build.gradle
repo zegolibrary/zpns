@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    task downloadSDK(type:Exec) {
+
+        workingDir './'
+        commandLine "python", "download_native_sdk.py", "--sdk_download_url", "https://artifact-master.zego.cloud/generic/zim/public/ZIM/android/ZIM-android-shared-java.zip?version=2.0.0.574", "--sdk_zip_root_folder", ""
+    }
+    
+    tasks.withType(JavaCompile) {
+        preBuild.dependsOn 'downloadSDK'
+    }
+}
+
+dependencies {
+    api (name: 'zpns-release', ext: 'aar')
+    //implementation 'androidx.appcompat:appcompat:1.2.0'
+    //implementation 'com.google.android.material:material:1.3.0'
+    //testImplementation 'junit:junit:4.+'
+    //androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
